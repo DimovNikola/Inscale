@@ -1,4 +1,7 @@
+using BusinessLayer.Services;
 using DataAccessLayer.Data;
+using DataAccessLayer.Models;
+using DataAccessLayer.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddTransient<IRepository<Resource>, Repository<Resource>>();
+builder.Services.AddTransient<IRepository<Booking>, Repository<Booking>>();
+builder.Services.AddTransient<IResourcesService, ResourcesService>();
 
 var app = builder.Build();
 

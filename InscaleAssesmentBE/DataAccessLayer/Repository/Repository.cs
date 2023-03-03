@@ -24,10 +24,8 @@ namespace DataAccessLayer.Repository
             return await _table.ToListAsync();
         }
 
-        public async Task<T?> GetById(object id)
+        public async Task<T?> GetById(int id)
         {
-            if (id == null) throw new ArgumentNullException();
-
             var item = await _table.FindAsync(id);
 
             return item != null ? item : null;
