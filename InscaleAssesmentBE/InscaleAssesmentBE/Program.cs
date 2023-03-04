@@ -1,3 +1,4 @@
+using BusinessLayer.Common;
 using BusinessLayer.Services;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
@@ -18,6 +19,8 @@ builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite(builder.Configur
 builder.Services.AddTransient<IRepository<Resource>, Repository<Resource>>();
 builder.Services.AddTransient<IRepository<Booking>, Repository<Booking>>();
 builder.Services.AddTransient<IResourcesService, ResourcesService>();
+builder.Services.AddTransient<IBookingsService, BookingsService>();
+builder.Services.AddSingleton<IDateManager, DateManager>();
 
 var app = builder.Build();
 

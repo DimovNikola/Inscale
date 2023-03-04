@@ -39,7 +39,7 @@ namespace DataAccessLayer.Data
             );
         }
 
-        DbSet<Resource> Resources { get; set; }
-        DbSet<Booking> Bookings { get; set; }
+        public DbSet<Resource> Resources { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
     }
 }
