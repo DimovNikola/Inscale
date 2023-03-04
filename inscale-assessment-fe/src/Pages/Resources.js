@@ -14,6 +14,7 @@ const Resources = () => {
   useEffect(() => {
     setLoading(true);
     GetResources().then((res) => {
+      console.log(res);
       setResources(res);
       setColumns(Object.keys(res[0]));
       setLoading(false);
@@ -23,9 +24,11 @@ const Resources = () => {
   async function GetResources() {
     var result = await ResourcesRepository.GetResources();
 
-    setResources(result);
+    if (result.data === null) {
+      // show not found page
+    }
 
-    return result;
+    return result.data;
   }
 
   function onClick(e) {

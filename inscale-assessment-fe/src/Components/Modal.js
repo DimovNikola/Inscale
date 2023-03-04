@@ -1,24 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BookingsRepository from "../Services/BookingsService";
 import DatePicker from "./DatePicker";
+import ErrorToast from "./ErrorToast";
+import SuccessToast from "./SuccessToast";
 
-const Modal = ({ setShowModal, resourceName, setSelectedResource }) => {
+const Modal = ({
+  setShowModal,
+  resourceName,
+  setSelectedResource,
+  resourceId,
+}) => {
   const [dateFrom, setDateFrom] = useState();
   const [dateTo, setDateTo] = useState();
   const [quantity, setQuantity] = useState();
+  const [showErrorToast, setShowErrorToast] = useState(false);
+  const [showSuccesToast, setShowSuccesToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState();
+
+  useEffect(() => {
+    console.log(dateFrom);
+  }, [dateFrom]);
 
   async function bookResource() {
+    console.log(dateFrom);
     let resource = {
       id: 0,
       dateFrom: dateFrom,
       dateTo: dateTo,
       bookedQuantity: quantity,
-      resourceId: setSelectedResource,
+      resourceId: resourceId,
     };
 
     var result = await BookingsRepository.BookResource(resource);
 
-    return result;
+    setToastMessage(result.message);
+    if (result.data === null) {
+      setShowErrorToast(true);
+      setInterval(() => {
+        setShowErrorToast(false);
+      }, 3500);
+    } else {
+      setShowSuccesToast(true);
+      setInterval(() => {
+        setShowSuccesToast(false);
+      }, 3500);
+    }
   }
 
   return (
@@ -26,6 +52,13 @@ const Modal = ({ setShowModal, resourceName, setSelectedResource }) => {
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
         <div className="relative w-auto my-6 mx-auto max-w-3xl">
           {/*content*/}
+          {showSuccesToast && (
+            <SuccessToast message={toastMessage} show={setShowSuccesToast} />
+          )}
+          {showErrorToast && (
+            <ErrorToast message={toastMessage} show={setShowErrorToast} />
+          )}
+          <br />
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-center justify-around p-5 border-b border-solid border-slate-200 rounded-t">

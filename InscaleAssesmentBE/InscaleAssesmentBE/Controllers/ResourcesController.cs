@@ -1,6 +1,6 @@
-﻿using BusinessLayer.Services;
+﻿using BusinessLayer.Response;
+using BusinessLayer.Services;
 using DataAccessLayer.DTOs;
-using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InscaleAssesmentBE.Controllers
@@ -17,7 +17,7 @@ namespace InscaleAssesmentBE.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Resource>>> GetAllResources()
+        public async Task<ActionResult<Response<List<ResourceDTO>>>> GetAllResources()
         {
             return await _resourcesService.GetResources();
         }

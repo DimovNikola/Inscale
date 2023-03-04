@@ -17,20 +17,20 @@ namespace DataAccessLayer.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Resource>().HasData(
-                new Resource
+            modelBuilder.Entity<ResourceDto>().HasData(
+                new ResourceDto
                 {
                     Id = 1,
                     Name = "Resource X",
                     Quantity = 100
                 },
-                new Resource
+                new ResourceDto
                 {
                     Id = 2,
                     Name = "Resource Y",
                     Quantity = 200
                 },
-                new Resource
+                new ResourceDto
                 {
                     Id = 3,
                     Name = "Resource Z",
@@ -39,7 +39,7 @@ namespace DataAccessLayer.Data
             );
         }
 
-        public DbSet<Resource> Resources { get; set; }
+        public DbSet<ResourceDto> Resources { get; set; }
         public DbSet<Booking> Bookings { get; set; }
     }
 }

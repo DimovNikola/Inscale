@@ -1,9 +1,13 @@
-﻿using BusinessLayer.Common;
+﻿using AutoMapper;
+using BusinessLayer.Common;
+using BusinessLayer.Response;
 using DataAccessLayer.Data;
+using DataAccessLayer.DTOs;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,35 +18,60 @@ namespace BusinessLayer.Services
     {
         private readonly IDateManager _dateManager;
         private DataContext _context;
+        private readonly IMapper _mapper;
 
-        public BookingsService(IDateManager dateManager, IRepository<Booking> repository, DataContext context) : base(repository)
+        public BookingsService(IDateManager dateManager, IRepository<Booking> repository, DataContext context, IMapper mapper) : base(repository)
         {
             _dateManager = dateManager;
             _context = context;
+            _mapper = mapper;
         }
 
-        public Task<List<Booking>> GetBookings() => _repository.GetAll();
+        // NOT USED FOR ASSESSMENT
+        public async Task<List<BookingDTO>> GetBookings()
+        {
+            var result = await _repository.GetAll();
+            
+            return result.Select(booking => _mapper.Map<BookingDTO>(booking)).ToList();
+        }
 
-        public async Task<Booking> InsertBooking(Booking booking)
+        public async Task<Response<BookingDTO>> InsertBooking(Booking booking)
         {
             var bookings = await GetBookingsForResource(booking.ResourceId, booking);
             var totalBooked = bookings.FirstOrDefault().Key;
+            var response = new Response<BookingDTO>();
 
             if (totalBooked != 0)
             {
-                var resource = _context.Resources.SingleOrDefault(resource => resource.Id == booking.ResourceId);
                 var totalAfterBooking = booking.BookedQuantity + totalBooked;
+                var resource = _context.Resources.SingleOrDefault(resource => resource.Id == booking.ResourceId);
+
+                if(resource == null) 
+                {
+                    response.Message = "Resource Not Found!";
+                    response.Data = null;
+
+                    return response;
+                }
 
                 if (ResourceQuantityExceeded(resource.Quantity, totalAfterBooking))
                 {
-                    return null;
+                    response.Message = "Resource Quantity Exceeded for Given Dates!";
+                    response.Data = null;
+
+                    return response;
                 }
             } 
 
             var savedBooking = await _repository.Insert(booking);
+            var bookingDto = _mapper.Map<BookingDTO>(savedBooking);
+
+            response.Message = "Resource Booked Successfully!";
+            response.Data = bookingDto;
+
             _repository.Save();
 
-            return savedBooking;
+            return response;
         }
         
         private async Task<Dictionary<int, List<Booking>>> GetBookingsForResource(int resourceId, Booking booking)

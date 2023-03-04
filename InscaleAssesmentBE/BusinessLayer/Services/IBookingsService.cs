@@ -1,4 +1,6 @@
-﻿using DataAccessLayer.Models;
+﻿using BusinessLayer.Response;
+using DataAccessLayer.DTOs;
+using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ namespace BusinessLayer.Services
 {
     public interface IBookingsService
     {
-        Task<List<Booking>> GetBookings();
-        Task<Booking> InsertBooking(Booking booking);
+        Task<List<BookingDTO>> GetBookings();
+        Task<Response<BookingDTO>> InsertBooking(Booking booking);
     }
 }

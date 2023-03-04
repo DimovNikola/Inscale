@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Models;
+﻿using BusinessLayer.Response;
+using DataAccessLayer.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace BusinessLayer.Services
 {
     public interface IResourcesService
     {
-        Task<List<Resource>> GetResources();
+        Task<Response<List<ResourceDTO>>> GetResources();
     }
 }

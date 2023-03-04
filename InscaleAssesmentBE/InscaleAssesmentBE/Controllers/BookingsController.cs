@@ -1,4 +1,6 @@
-﻿using BusinessLayer.Services;
+﻿using BusinessLayer.Response;
+using BusinessLayer.Services;
+using DataAccessLayer.DTOs;
 using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +18,7 @@ namespace InscaleAssesmentBE.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Booking>> BookResource(Booking booking) 
+        public async Task<ActionResult<Response<BookingDTO>>> BookResource(Booking booking) 
         {
             return await _bookingsService.InsertBooking(booking);
         }
