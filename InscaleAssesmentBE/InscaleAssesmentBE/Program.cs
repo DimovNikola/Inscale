@@ -3,6 +3,7 @@ using BusinessLayer.Services;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
+using MailingServiceMock.EmailManager;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,7 @@ builder.Services.AddTransient<IRepository<Booking>, Repository<Booking>>();
 builder.Services.AddTransient<IResourcesService, ResourcesService>();
 builder.Services.AddTransient<IBookingsService, BookingsService>();
 builder.Services.AddSingleton<IDateManager, DateManager>();
+builder.Services.AddSingleton<IMailingManager, MailingManager>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

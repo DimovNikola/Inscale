@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\MailingServiceMock\MailingServiceMock.csproj" />
   </ItemGroup>
 
   <ItemGroup>

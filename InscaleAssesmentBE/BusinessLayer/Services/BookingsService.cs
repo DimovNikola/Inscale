@@ -5,6 +5,7 @@ using DataAccessLayer.Data;
 using DataAccessLayer.DTOs;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
+using MailingServiceMock.EmailManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,12 +20,14 @@ namespace BusinessLayer.Services
         private readonly IDateManager _dateManager;
         private DataContext _context;
         private readonly IMapper _mapper;
+        private readonly IMailingManager _mailingManager;
 
-        public BookingsService(IDateManager dateManager, IRepository<Booking> repository, DataContext context, IMapper mapper) : base(repository)
+        public BookingsService(IDateManager dateManager, IRepository<Booking> repository, DataContext context, IMapper mapper, IMailingManager mailingManager) : base(repository)
         {
             _dateManager = dateManager;
             _context = context;
             _mapper = mapper;
+            _mailingManager = mailingManager;
         }
 
         // NOT USED FOR ASSESSMENT
@@ -71,6 +74,8 @@ namespace BusinessLayer.Services
 
             _repository.Save();
 
+            _mailingManager.SendEmailBookedResource(savedBooking.Id);
+
             return response;
         }
         
@@ -90,7 +95,7 @@ namespace BusinessLayer.Services
                         b.DateTo, 
                         booking.DateFrom, 
                         booking.DateTo
-                    )
+                    ) && b.Id == resourceId
                 ).ToList();
 
             return conflictingBookings != null 
