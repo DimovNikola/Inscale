@@ -50,7 +50,7 @@ namespace BusinessLayer.Helpers
                 : new Dictionary<int, List<Booking>>();
         }
 
-        public Response<BookingDTO> CheckCanBookResource(int totalAfterBooking, Response<BookingDTO> response, Resource resource)
+        public Response<BookingDTO> CheckCanBookResource(int totalAfterBooking, Response<BookingDTO> response, Resource? resource)
         {
             if (resource == null)
             {

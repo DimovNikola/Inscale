@@ -13,7 +13,8 @@ namespace BusinessLayer.Common
             if (
                 (dateCheckFrom.Date >= dateFrom.Date && dateCheckTo.Date <= dateTo.Date) ||
                 (dateCheckFrom.Date <= dateFrom.Date && dateCheckTo.Date <= dateTo.Date && dateCheckTo.Date > dateFrom.Date) ||
-                (dateCheckFrom.Date >= dateFrom.Date && dateCheckTo.Date >= dateTo.Date && dateCheckFrom.Date < dateTo.Date)
+                (dateCheckFrom.Date >= dateFrom.Date && dateCheckTo.Date >= dateTo.Date && dateCheckFrom.Date < dateTo.Date) ||
+                (dateCheckFrom.Date < dateFrom.Date && dateCheckTo.Date > dateTo.Date)
                )
                 return true;
             else

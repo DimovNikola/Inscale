@@ -1,28 +1,28 @@
-﻿using AutoMapper;
-using BusinessLayer;
-using BusinessLayer.Common;
-using BusinessLayer.Helpers;
-using BusinessLayer.Response;
-using BusinessLayer.Services;
-using DataAccessLayer.AutoMapperProfiles;
-using DataAccessLayer.Data;
-using DataAccessLayer.DTOs;
-using DataAccessLayer.Models;
-using DataAccessLayer.Repository;
-using MailingServiceMock.EmailManager;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Moq;
-using Moq.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace InscaleAssessment.Tests.ServicesTests
+﻿namespace InscaleAssessment.Tests.ServicesTests
 {
+    using BusinessLayer;
+    using BusinessLayer.Common;
+    using BusinessLayer.Helpers;
+    using BusinessLayer.Response;
+    using BusinessLayer.Services;
+    using DataAccessLayer.AutoMapperProfiles;
+    using DataAccessLayer.Data;
+    using DataAccessLayer.DTOs;
+    using DataAccessLayer.Models;
+    using DataAccessLayer.Repository;
+    using MailingServiceMock.EmailManager;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Options;
+    using Moq;
+    using Moq.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Xunit;
+    using AutoMapper;
+
     public class BookingsServiceTests
     {
         Booking booking = new Booking
@@ -40,13 +40,6 @@ namespace InscaleAssessment.Tests.ServicesTests
             DateFrom = It.IsAny<DateTime>(),
             DateTo = It.IsAny<DateTime>(),
             BookedQuantity = 10,
-        };
-
-        Resource resource = new Resource
-        {
-            Id = 1,
-            Name = "Resource Y",
-            Quantity = 200
         };
 
         Dictionary<int, List<Booking>> bookings = new Dictionary<int, List<Booking>>
@@ -73,7 +66,6 @@ namespace InscaleAssessment.Tests.ServicesTests
         private readonly Mock<IMapper> _mapperMock;
         private readonly Mock<IMailingManager> _mailingManagerMock;
         private readonly Mock<IBookingsHelpers> _bookingsHelpersMock;
-        private readonly Mock<DataContext> _dataContextMock;
 
         public BookingsServiceTests()
         {
@@ -81,7 +73,6 @@ namespace InscaleAssessment.Tests.ServicesTests
             _mapperMock = new Mock<IMapper>();
             _mailingManagerMock = new Mock<IMailingManager>();
             _bookingsHelpersMock = new Mock<IBookingsHelpers>();
-            _dataContextMock = new Mock<DataContext>(options);
         }
 
         [Fact]
