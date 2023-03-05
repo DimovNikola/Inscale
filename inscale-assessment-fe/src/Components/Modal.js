@@ -17,12 +17,7 @@ const Modal = ({
   const [showSuccesToast, setShowSuccesToast] = useState(false);
   const [toastMessage, setToastMessage] = useState();
 
-  useEffect(() => {
-    console.log(dateFrom);
-  }, [dateFrom]);
-
   async function bookResource() {
-    console.log(dateFrom);
     let resource = {
       id: 0,
       dateFrom: dateFrom,
@@ -31,20 +26,42 @@ const Modal = ({
       resourceId: resourceId,
     };
 
-    var result = await BookingsRepository.BookResource(resource);
+    var valid = validateObj(resource);
+    if (valid) {
+      var result = await BookingsRepository.BookResource(resource);
 
-    setToastMessage(result.message);
-    if (result.data === null) {
+      setToastMessage(result.message);
+      if (result.data === null) {
+        setShowErrorToast(true);
+        setInterval(() => {
+          setShowErrorToast(false);
+        }, 3500);
+      } else {
+        setShowSuccesToast(true);
+        setInterval(() => {
+          setShowSuccesToast(false);
+        }, 3500);
+      }
+    } else {
+      setToastMessage("Please Fill All Data!");
       setShowErrorToast(true);
       setInterval(() => {
         setShowErrorToast(false);
       }, 3500);
-    } else {
-      setShowSuccesToast(true);
-      setInterval(() => {
-        setShowSuccesToast(false);
-      }, 3500);
     }
+  }
+
+  function validateObj(resource) {
+    if (
+      resource.dateFrom === undefined ||
+      resource.dateTo === undefined ||
+      resource.bookedQuantity < 1 ||
+      resource.bookedQuantity === undefined
+    ) {
+      return false;
+    }
+
+    return true;
   }
 
   return (

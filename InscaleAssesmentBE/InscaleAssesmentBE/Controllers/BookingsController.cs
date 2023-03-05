@@ -2,6 +2,7 @@
 using BusinessLayer.Services;
 using DataAccessLayer.DTOs;
 using DataAccessLayer.Models;
+using InscaleAssesmentBE.Validations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InscaleAssesmentBE.Controllers
@@ -18,9 +19,14 @@ namespace InscaleAssesmentBE.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Response<BookingDTO>>> BookResource(Booking booking) 
+        public async Task<IActionResult> BookResource(Booking booking) 
         {
-            return await _bookingsService.InsertBooking(booking);
+            if(!ModelState.IsValid)
+            {
+                StatusCode(StatusCodes.Status400BadRequest, ModelState);
+            }
+
+            return StatusCode(StatusCodes.Status201Created, await _bookingsService.InsertBooking(booking));
         }
     }
 }

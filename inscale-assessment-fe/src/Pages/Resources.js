@@ -14,7 +14,6 @@ const Resources = () => {
   useEffect(() => {
     setLoading(true);
     GetResources().then((res) => {
-      console.log(res);
       setResources(res);
       setColumns(Object.keys(res[0]));
       setLoading(false);
@@ -32,7 +31,6 @@ const Resources = () => {
   }
 
   function onClick(e) {
-    console.log(e.target.id);
     // display modal
     setShowModal(true);
     setSelectedResource(e.target.id);

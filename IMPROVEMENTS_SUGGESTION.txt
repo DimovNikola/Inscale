@@ -1,0 +1,10 @@
+The solution can be done using microservices which will communicate wiht HttpClient and use a message broker like RabbitMQ or Azure Messaging Survice Bus
+- Resources microservice
+- Bookings microservice
+- Mailing micorservice
+
+- Add user accounts (authentication/authorization)
+- Admin panel
+- Display resources with available dates
+- Update FE when resource booked
+- Resource booking on FE can be done as a FORM and have better validation

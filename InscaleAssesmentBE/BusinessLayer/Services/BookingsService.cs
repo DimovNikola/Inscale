@@ -31,15 +31,14 @@
 
         public async Task<Response<BookingDTO>> InsertBooking(Booking booking)
         {
+            var resource = _context.Resources.FirstOrDefault(resource => resource.Id == booking.ResourceId);
             var bookings = await _bookingsHelpers.GetBookingsForResource(booking.ResourceId, booking);
             var totalBooked = bookings.FirstOrDefault().Key;
             var response = new Response<BookingDTO>();
 
-            if (totalBooked != 0)
+            if (totalBooked != 0 || resource == null)
             {
                 var totalAfterBooking = booking.BookedQuantity + totalBooked;
-                var resource = _context.Resources.FirstOrDefault(resource => resource.Id == booking.ResourceId);
-
                 var canBookResourceResponse = _bookingsHelpers.CheckCanBookResource(totalAfterBooking, response, resource);
 
                 if(!String.IsNullOrEmpty(canBookResourceResponse.Message))
