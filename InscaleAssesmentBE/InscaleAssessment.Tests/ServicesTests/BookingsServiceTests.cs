@@ -17,5 +17,6 @@ namespace InscaleAssessment.Tests.ServicesTests
 {
     public class BookingsServiceTests
     {
+
     }
 }
