@@ -1,4 +1,5 @@
 using BusinessLayer.Common;
+using BusinessLayer.Helpers;
 using BusinessLayer.Services;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
@@ -23,6 +24,7 @@ builder.Services.AddTransient<IResourcesService, ResourcesService>();
 builder.Services.AddTransient<IBookingsService, BookingsService>();
 builder.Services.AddSingleton<IDateManager, DateManager>();
 builder.Services.AddSingleton<IMailingManager, MailingManager>();
+builder.Services.AddTransient<IBookingsHelpers, BookingsHelpers>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

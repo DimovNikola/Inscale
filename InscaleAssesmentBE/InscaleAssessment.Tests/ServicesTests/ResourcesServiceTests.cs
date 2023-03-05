@@ -43,6 +43,7 @@ namespace InscaleAssessment.Tests.ServicesTests
 
         private readonly Mock<IRepository<Resource>> _repositoryMock;
         private readonly Mock<IMapper> _mapper;
+
         public ResourcesServiceTests()
         {
             _repositoryMock = new Mock<IRepository<Resource>>();
@@ -70,6 +71,28 @@ namespace InscaleAssessment.Tests.ServicesTests
             Assert.NotNull(resourcesResponse.Data);
             Assert.Equal(2, resourcesResponse.Data.Count);
             Assert.Equal(resourcesDTOs, response.Data);
+        }
+
+        [Fact]
+        public async void Resources_GetAllResources_NoResourcesToReturn()
+        {
+            // Arrange
+            var response = new Response<List<ResourceDTO>>();
+            var resourcesService = new ResourcesService(_repositoryMock.Object, _mapper.Object);
+
+
+            response.Message = "No Available Resources!";
+            response.Data = null;
+
+            _repositoryMock.Setup(x => x.GetAll())
+                .Returns(Task.FromResult(new List<Resource>()));
+
+            // Act
+            var resourcesResponse = await resourcesService.GetResources();
+
+            // Assert
+            Assert.Equal(response.Data, resourcesResponse.Data);
+            Assert.Equal(response.Message, resourcesResponse.Message);
         }
     }
 }

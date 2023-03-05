@@ -11,7 +11,6 @@ namespace BusinessLayer.Services
 {
     public interface IBookingsService
     {
-        Task<List<BookingDTO>> GetBookings();
         Task<Response<BookingDTO>> InsertBooking(Booking booking);
     }
 }
