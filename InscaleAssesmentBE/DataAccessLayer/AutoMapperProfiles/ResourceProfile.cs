@@ -13,7 +13,7 @@ namespace DataAccessLayer.AutoMapperProfiles
     {
         public ResourceProfile()
         {
-            CreateMap<ResourceDTO, ResourceDto>().ReverseMap();
+            CreateMap<ResourceDTO, Resource>().ReverseMap();
         }
     }
 }

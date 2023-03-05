@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Services
 {
-    public class ResourcesService : BaseService<ResourceDto>, IResourcesService
+    public class ResourcesService : BaseService<Resource>, IResourcesService
     {
         private readonly IMapper _mapper;
 
-        public ResourcesService(IRepository<ResourceDto> repository, IMapper mapper) : base(repository)
+        public ResourcesService(IRepository<Resource> repository, IMapper mapper) : base(repository)
         {
             _mapper = mapper;
         }
