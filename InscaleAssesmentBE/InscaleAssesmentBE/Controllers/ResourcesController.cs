@@ -1,10 +1,10 @@
-﻿using BusinessLayer.Response;
-using BusinessLayer.Services;
-using DataAccessLayer.DTOs;
-using Microsoft.AspNetCore.Mvc;
-
-namespace InscaleAssesmentBE.Controllers
+﻿namespace InscaleAssesmentBE.Controllers
 {
+    using BusinessLayer.Response;
+    using BusinessLayer.Services;
+    using DataAccessLayer.DTOs;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
     public class ResourcesController : ControllerBase

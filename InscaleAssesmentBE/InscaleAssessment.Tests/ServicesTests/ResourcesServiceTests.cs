@@ -1,14 +1,14 @@
-﻿using AutoMapper;
-using BusinessLayer.Response;
-using BusinessLayer.Services;
-using DataAccessLayer.DTOs;
-using DataAccessLayer.Models;
-using DataAccessLayer.Repository;
-using Moq;
-using Xunit;
-
-namespace InscaleAssessment.Tests.ServicesTests
+﻿namespace InscaleAssessment.Tests.ServicesTests
 {
+    using AutoMapper;
+    using BusinessLayer.Response;
+    using BusinessLayer.Services;
+    using DataAccessLayer.DTOs;
+    using DataAccessLayer.Models;
+    using DataAccessLayer.Repository;
+    using Moq;
+    using Xunit;
+
     public class ResourcesServiceTests
     {
         List<Resource> resources = new List<Resource>

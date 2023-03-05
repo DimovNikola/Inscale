@@ -6,7 +6,11 @@ The solution can be done using microservices which will communicate wiht HttpCli
 - Add user accounts (authentication/authorization)
 - Admin panel
 - Display resources with available dates
+- Add paging for resources table
 - Update FE when resource booked
 - Resource booking on FE can be done as a FORM and have better validation
 
-- Add tracing in order to monitor app performance and diagnose errors
+- Add tracing in order to monitor app performance and diagnose errors (for example OpenTelemetry)
+- Can add API documentation
+
+Ideas never stop comming... :D

@@ -1,16 +1,14 @@
-﻿using AutoMapper;
-using BusinessLayer.Response;
-using DataAccessLayer.DTOs;
-using DataAccessLayer.Models;
-using DataAccessLayer.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BusinessLayer.Services
+﻿namespace BusinessLayer.Services
 {
+    using AutoMapper;
+    using BusinessLayer.Response;
+    using DataAccessLayer.DTOs;
+    using DataAccessLayer.Models;
+    using DataAccessLayer.Repository;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class ResourcesService : BaseService<Resource>, IResourcesService
     {
         private readonly IMapper _mapper;

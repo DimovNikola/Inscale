@@ -1,14 +1,10 @@
-﻿using BusinessLayer.Response;
-using DataAccessLayer.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BusinessLayer.Services
+﻿namespace BusinessLayer.Services
 {
+    using BusinessLayer.Response;
+    using DataAccessLayer.DTOs;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IResourcesService
     {
         Task<Response<List<ResourceDTO>>> GetResources();

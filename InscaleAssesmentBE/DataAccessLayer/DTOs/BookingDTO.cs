@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataAccessLayer.DTOs
+﻿namespace DataAccessLayer.DTOs
 {
+    using System;
+
     public class BookingDTO
     {
         public int Id { get; set; }

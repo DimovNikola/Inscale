@@ -1,13 +1,9 @@
-﻿using BusinessLayer.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace InscaleAssessment.Tests.DateManagerTests
+﻿namespace InscaleAssessment.Tests.DateManagerTests
 {
+    using BusinessLayer.Common;
+    using System;
+    using Xunit;
+
     public class DateManagerTests
     {
         [Fact]

@@ -1,14 +1,9 @@
-﻿using DataAccessLayer.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BusinessLayer
+﻿namespace BusinessLayer
 {
+    using DataAccessLayer.Repository;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public class BaseService<T> : IBaseService<T> where T : class
     {
         protected readonly IRepository<T> _repository;

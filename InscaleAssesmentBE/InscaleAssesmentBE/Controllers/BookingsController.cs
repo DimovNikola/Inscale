@@ -1,12 +1,9 @@
-﻿using BusinessLayer.Response;
-using BusinessLayer.Services;
-using DataAccessLayer.DTOs;
-using DataAccessLayer.Models;
-using InscaleAssesmentBE.Validations;
-using Microsoft.AspNetCore.Mvc;
-
-namespace InscaleAssesmentBE.Controllers
+﻿namespace InscaleAssesmentBE.Controllers
 {
+    using BusinessLayer.Services;
+    using DataAccessLayer.Models;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
     public class BookingsController : ControllerBase
